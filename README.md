@@ -6,10 +6,9 @@ python.
 1. I have wiritten a python file named for_k8s_delete_dploy.py in this file I have created a function named delete_a_deploy() 
 this function will delete a deployment.
 
-2. I am feteching the names and creation time of deployment a file named deployment_creation_time.txt this file is created using 
-my own logic I am not using any sdk for this.
+2. I am feteching the names and creation time of deployment from a file named deployment_creation_time.txt this file is created using my own logic I am not using any sdk for this.
 
-3. I will pass the name of deployment in delete_a_deploy() and deployment will be deleted by checking it's creation time.
+3. I will pass the name of deployment in delete_a_deploy() and deployment will be deleted by checking it's creation time from the file named deployment_creation_time.txt.
 I have used if else condition for deletion (based on some time constratients)
 
 4. When I have successfully deleted the deployment then I have used a cronJob for the deployment deletion.
