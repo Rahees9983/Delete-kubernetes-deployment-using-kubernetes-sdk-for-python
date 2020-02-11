@@ -1,0 +1,25 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: delete-deploy-cjob1
+spec:
+  schedule: "*/3 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: delete-deploy-cjob1
+            image: cjob_delete_deploy
+            imagePullPolicy: IfNotPresent
+            ports:
+              - containerPort: 5778
+            volumeMounts:
+            - mountPath: /data/get_deployment_files
+              name: mongo-storage
+          restartPolicy: OnFailure
+          volumes:
+          - name: mongo-storage
+            persistentVolumeClaim:
+             claimName: mongo-claim
+

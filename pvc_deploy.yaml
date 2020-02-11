@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pvc-file
+  labels:
+    app: pvc-file
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pvc-file
+  template:
+    metadata:
+      labels:
+        app: pvc-file
+    spec:
+      # hostNetwork: true
+      containers:
+      - name: pvc-file
+        image: get_deployment_files
+        imagePullPolicy: IfNotPresent
+        # resources: #not there
+        #   requests:
+        #     cpu: 100m
+        #     memory: 100Mi
+        #   limits:
+        #     memory: "128Mi"
+        #     cpu: "500m" #------
+        ports:
+        - containerPort: 5777
+        volumeMounts:
+        - name: mongo-storage
+          mountPath: /data/get_deployment_files
+      volumes:
+      - name: mongo-storage
+        persistentVolumeClaim:
+          claimName: mongo-claim
